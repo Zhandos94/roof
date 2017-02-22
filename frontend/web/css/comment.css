@@ -1,0 +1,97 @@
+.comment-form {
+	margin: auto;
+	margin-top: 30px;
+	width: 90%;
+	padding: 10px;
+}
+.form-group {
+	margin: 0 !important;
+	padding: : 0 !important;
+}
+.form-group label {	
+	margin: 0 !important;
+}
+textarea {
+	resize: both !important;
+	min-height: 60px !important;
+}
+.form-control {
+	border: 1px solid #ddd !important;
+	padding: 5px 15px !important;
+}
+.form-close {
+	color: #aaa !important;
+}
+#comments {
+	margin-left: 20px;
+	width: 70%;
+}
+.item-comment {
+	border-bottom: 1px solid #ddd;
+	margin: 25px 10px;
+	padding: 5px;
+}
+.comment-header {
+	margin-bottom: 20px;
+}
+
+.created-date {
+	font-size: 80%;
+	color: #C1BDC7;
+}
+
+.child-comment {
+	/*border-top: 1px solid #ddd;*/
+	margin-left: 50px;
+	background-color: white;
+}
+.button-reply {
+	position: relative;
+	left:0%;
+	margin-bottom: 10px;
+}
+.likes {
+	display: inline-block;
+}
+.like:hover, .diss-like:hover {
+	cursor: pointer;
+	color: green;
+}
+.like-count {
+	display: inline-block;
+	margin-left: 20px;
+}
+.like-count span {
+	padding: 5px;
+}
+.like-count-up {
+	color: green;
+}
+.like-count-down {
+	color: red;
+}
+.nickname {
+	margin-right: 25px;
+}
+.custom-success {
+	width: 100%;
+	background: green;
+	text-align: center;
+	padding: 20px;
+}
+.fa-thumbs-o-down {
+	-moz-transform: scaleX(-1);
+	-o-transform: scaleX(-1);
+	-webkit-transform: scaleX(-1);
+	transform: scaleX(-1);
+}
+.guest_like {
+	display: none;
+}
+.likedAfterDisabled {
+
+}
+
+.no-moderation {
+	padding: 20px;
+}
