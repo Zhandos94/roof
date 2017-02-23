@@ -59,7 +59,7 @@ use \frontend\components\Common;
                                 <div class="status <?=($row['sold']) ? 'new' : 'sold' ?>"><?=Common::getType($row) ?></div>
                             </div>
                             <h4><a href="<?= Common::getUrlAdvert($row) ?>" ><?= Common::getTitle($row) ?></a></h4>
-                            <p class="price">Price: $<?=$row['price'] ?></p>
+                            <p class="price">Price:  <?= Common::getParseMoney($row['price']) ?></p>
                             <div class="listing-detail">
                                 <span data-toggle="tooltip" data-placement="bottom" data-original-title="Bed Room"><?=$row['bedroom'] ?></span>
                                 <span data-toggle="tooltip" data-placement="bottom" data-original-title="Living Room"><?=$row['livingroom'] ?></span>

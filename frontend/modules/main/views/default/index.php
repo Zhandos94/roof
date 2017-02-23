@@ -12,11 +12,11 @@ use yii\helpers\Url;
                     <div class="sl-slide-inner">
                         <div class="bg-img" style="background-image: url('<?= '../'. Common::getSliderImage($row)[0] ?>')"></div>*/
                     </div>
-                    <h2><a href="#"> <?= Common::getTitle($row) ?></a></h2>
+                    <h2><a href="<?= Common::getUrlAdvert($row)?>"> <?= Common::getTitle($row) ?></a></h2>
                     <blockquote>
                         <p class="location"><span class="glyphicon glyphicon-map-marker"></span> <?= $row['address'] ?> </p>
                         <p> <?= Common::cutStr($row['description'])?></p>
-                        <cite>$ <?= $row['price'] . ' тг'?> </cite>
+                        <cite><?= Common::getParseMoney($row['price']) ?> </cite>
                     </blockquote>
                 </div>
             <?php } ?>
@@ -93,7 +93,7 @@ use yii\helpers\Url;
                         <div class="status <?= ($row['sold']) ? 'new' : 'sold' ?>"><?= ($row['sold']) ? 'sold' : 'new' ?></div>
                     </div>
                     <h4><a href="<?= Url::toRoute(['/main/main/view-advert', 'id' => $row['idadvert']])?>"> <?= Common::getTitle($row) ?> </a></h4>
-                    <p class="price"><?= $row['price'] . ' тг' ?></p>
+                    <p class="price"><?= Common::getParseMoney($row['price']) ?></p>
                     <div class="listing-detail">
                         <span data-toggle="tooltip" data-placement="bottom" data-original-title="Bed Room"> <?= $row['bedroom']?> </span>
                         <span data-toggle="tooltip" data-placement="bottom" data-original-title="Living Room"> <?= $row['livingroom'] ?> </span>
@@ -138,7 +138,9 @@ use yii\helpers\Url;
                                     </div>
                                     <div class="col-lg-8">
                                         <h5><a href="<?= Url::toRoute(['/main/main/view-advert', 'id' => $row['idadvert']])?>"> <?= Common::getTitle($row) ?></a></h5>
-                                        <p class="price"> <?=$row['price'] . ' тг' ?></p>
+                                        <p class="price">
+                                            <?= Common::getParseMoney($row['price']) ?>
+                                        </p>
                                         <a href="<?= Url::toRoute(['/main/main/view-advert', 'id' => $row['idadvert']])?>"  class="more">More Detail</a>
                                     </div>
                                 </div>

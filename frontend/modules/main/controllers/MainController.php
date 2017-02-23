@@ -126,7 +126,6 @@ class MainController extends \yii\web\Controller
 
         if ($price) {
             $prices = explode("-", $price);
-
             if (isset($prices[0]) && isset($prices[1])) {
                 $query->andWhere(['between', 'price', $prices[0], $prices[1]]);
             } else {
@@ -139,10 +138,8 @@ class MainController extends \yii\web\Controller
         $pages->setPageSize(3);
 
         $model = $query->offset($pages->offset)->limit($pages->limit)->all();
-
         $request = \Yii::$app->request;
-//        var_dump($propert);
-//        die();
+
         return $this->render("find", ['model' => $model, 'pages' => $pages, 'request' => $request]);
 
     }
@@ -180,7 +177,6 @@ class MainController extends \yii\web\Controller
 
         $coord = new LatLng(['lat' => $coords[0], 'lng' => $coords[1]]);
 
-//        print_r($coord);
         $map = new Map([
             'center' => $coord,
             'zoom' => 13,

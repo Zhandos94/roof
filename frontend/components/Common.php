@@ -63,13 +63,33 @@ class Common extends Component
     }
 
 
-    public static function getType($row){
+    public static function getType($row)
+    {
         return ($row['sold']) ? 'Sold' : 'New';
     }
 
-    public  static function getUrlAdvert($row){
-
+    public static function getUrlAdvert($row)
+    {
         return Url::to(['/main/main/view-advert', 'id' => $row['idadvert']]);
+    }
+
+    public static function getParseMoney($int)
+    {
+        $money = [];
+        $int = array_reverse(str_split($int));
+
+        $i = 0;
+        foreach ($int as $value) {
+            if ($i == 3) {
+                $money[] = ',';
+                $i = 0;
+            }
+            $money[] = $value;
+            $i++;
+        }
+        $money = implode('', array_reverse($money)) . ' тг';
+
+        return $money;
     }
 
     public static function getSliderImage($data, $general = true, $original = false)
@@ -78,15 +98,14 @@ class Common extends Component
         $base = Url::base();
 
         if ($general) {
-//            $image[] = $base . '/uploads/adverts/' . $data['idadvert'] . '/general/' . $data['general_image'];
             $image[] = $base . '/uploads/adverts/' . $data['idadvert'] . '/general/small_' . $data['general_image'];
         } else {
-            $path = \Yii::getAlias("@frontend/web/uploads/adverts/".$data['idadvert']);
+            $path = \Yii::getAlias("@frontend/web/uploads/adverts/" . $data['idadvert']);
 
             $files = BaseFileHelper::findFiles($path);
             foreach ($files as $file) {
                 if (strstr($file, 'small_') && !strstr($file, 'general')) {
-                    $image[] = $base . '/uploads/adverts/' . $data['idadvert'] . '/' .basename($file);
+                    $image[] = $base . '/uploads/adverts/' . $data['idadvert'] . '/' . basename($file);
                 }
             }
         }

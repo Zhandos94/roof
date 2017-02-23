@@ -60,21 +60,18 @@ use yii\helpers\Html;
                     </div>
                     <div><h4><span class="glyphicon glyphicon-map-marker"></span> Location</h4>
                         <div class="well">
-<!--                            <iframe width="100%" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="../../../maps.google.com/fi000001.002642&t=m&z=14&output=embed" ></iframe>-->
                             <?= $map->display()?>
-<!--                            --><?// echo $map->display(); ?>
-
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="col-lg-12 col-sm-6">
                         <div class="property-info">
-                            <p class="price"><?= $model->price . ' тг'?></p>
+                            <p class="price"> <?= Common::getParseMoney($model->price) ?></p>
                             <p class="area"><span class="glyphicon glyphicon-map-marker"></span> <?= $model->address?> </p>
                             <div class="profile">
                             <span class="glyphicon glyphicon-user"></span> Agent Details
-<!--                            <p>--><?//= $model->user->username ?><!--<br> --><?//= $model->user->email ?><!--</p>-->
+                            <p><?= $model->user->username ?><br> <?=$model->user->email ?></p>
                             </div>
                         </div>
 
