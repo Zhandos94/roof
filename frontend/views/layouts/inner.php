@@ -1,7 +1,7 @@
 <?php
 use yii\helpers\Html;
-use yii\bootstrap\Nav;
 use frontend\assets\MainAsset;
+use yii\helpers\Url;
 
 MainAsset::register($this);
 ?>
@@ -27,7 +27,7 @@ MainAsset::register($this);
 
 <div class="inside-banner">
     <div class="container">
-        <span class="pull-right"><a href="#">Home</a> / <?=$this->title ?></span>
+        <span class="pull-right"><a href="<?= Url::to(['/main/default']) ?>">Home</a> / <?=$this->title ?></span>
         <h2><?=$this->title ?></h2>
     </div>
 </div>
@@ -36,7 +36,7 @@ MainAsset::register($this);
 <!-- banner -->
 <div class="container">
     <div class="spacer">
-        <?=$content ?>
+        <?= $content ?>
     </div>
 </div>
 

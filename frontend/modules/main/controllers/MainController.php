@@ -14,6 +14,7 @@ use frontend\models\ContactForm;
 use frontend\models\SignupForm;
 use frontend\modules\cabinet\models\Advert;
 use kartik\form\ActiveForm;
+use Yii;
 use yii\base\DynamicModel;
 use yii\data\Pagination;
 use yii\web\Response;
@@ -36,7 +37,12 @@ class MainController extends \yii\web\Controller
             'test' => [
                 'class' => 'frontend\actions\TestAction',
                 'viewName' => 'test'
+            ],
+            'page' => [
+                'class' => 'yii\web\ViewAction',
+                'layout' => 'inner',
             ]
+
         ];
     }
 
@@ -100,18 +106,30 @@ class MainController extends \yii\web\Controller
     public function actionContact()
     {
 
+        ///Google Map
+
+        $coord = new LatLng(['lat' => '43.2220146', 'lng' => '76.8512485']);
+
+        $map = new Map([
+            'center' => $coord,
+            'zoom' => 13,
+        ]);
+
+        $marker = new Marker([
+            'position' => $coord,
+            'title' => 'Almaty',
+        ]);
+
+        $map->addOverlay($marker);
+        ///End Google Map
+
         $model = new ContactForm();
         if ($model->load(\Yii::$app->request->post()) && $model->validate()) {
-            $body = " <div>Body: <b> " . $model->body . " </b></div>";
-            $body .= " <div>Email: <b> " . $model->email . " </b></div>";
-
-            \Yii::$app->common->sendMail($model->subject, $body);
-
-            print "Send success";
-            die;
+            Common::Mail($model->subject, $model->email, $model->body, $model->name);
+            $this->refresh();
         }
 
-        return $this->render("contact", ['model' => $model]);
+        return $this->render("contact", ['model' => $model, 'map' => $map]);
     }
 
     public function actionFind($propert = '', $price = '', $apartment = '')
@@ -164,9 +182,8 @@ class MainController extends \yii\web\Controller
 
         if (\Yii::$app->request->isPost) {
             if ($model_feeback->load(\Yii::$app->request->post()) && $model_feeback->validate()) {
-                $send = new Common();
-                $send->sendMail('Subject Advert', $model_feeback->text, $model_feeback->email);
-
+                Common::Mail('Subject Advert', $model_feeback->email, $model_feeback->text, $model_feeback->name);
+                Yii::$app->session->setFlash('success', 'Message has sended successfully');
             } else {
                 \Yii::error($model_feeback->getErrors(), 'advert');
             }

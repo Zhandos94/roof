@@ -17,17 +17,22 @@ class DefaultController extends Controller
      */
     public function actionIndex()
     {
+
+
         $this->layout = "default";
         $query = Advert::find()->orderBy(['idadvert' => SORT_DESC]);
 
         $slider_data = $query->limit(5)->asArray()->all();
-        $slider_data_count = $query->count();
+        $slider_data_count = count($slider_data);
         $property = $query->asArray()->limit(15)->all();
 
-        $recommend_query = $query->where('recommend = 1')->limit(5);
-        $recommend = $recommend_query->all();
-        $recommend_count = $recommend_query->count();
 
+        $recommend_query = $query->where('recommend = 1');
+        $recommend = $recommend_query->all();
+        $recommend_count = count($recommend);
+
+//                var_dump($recommend);
+//        die();
         return $this->render('index', [
             'slider_data' => $slider_data,
             'slider_data_count' => $slider_data_count,

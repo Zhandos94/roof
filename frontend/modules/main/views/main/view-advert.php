@@ -5,11 +5,15 @@
  * Date: 11.02.2017
  * Time: 10:50
  */
+use demogorgorn\ajax\AjaxSubmitButton;
 use frontend\components\Common;
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 
+$this->title = 'Advert view';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
+
 
 <div class="container">
     <div class="properties-listing spacer">
@@ -87,14 +91,38 @@ use yii\helpers\Html;
                     <div class="col-lg-12 col-sm-6 ">
                         <div class="enquiry">
                         <h6><span class="glyphicon glyphicon-envelope"></span> Post Enquiry</h6>
-                            <?php $form = ActiveForm::begin();?>
+                            <?php $form = ActiveForm::begin([
+                                    'id' => 'sendMessage',
+                            ]
+                            );?>
                                 <?= $form->field($model_feeback, 'name')->textInput([
                                     'value' => $curent_user['name'], 'placeholder' => 'Name'])->label(false) ?>
                                 <?= $form->field($model_feeback, 'email')->textInput([
                                     'value' => $curent_user['email'], 'placeholder' => 'Email'])->label(false) ?>
                                 <?= $form->field($model_feeback, 'text')->textarea([
                                         'rows'=>6, 'placeholder' => 'Whats on your mind?' ])->label(false)?>
-                                <?= Html::submitButton('Send message', ['class' => 'btn btn-primary'])?>
+                            <?php
+                            AjaxSubmitButton::begin([
+                                'label' => 'Send message',
+                                'useWithActiveForm' => 'sendMessage',
+                                'ajaxOptions' => [
+                                    'type' => 'POST',
+                                    'success' => new \yii\web\JsExpression("function(data) {
+                                        console.log('asd');
+                                        var div_name = $('.enquiry');
+                                        if (document.getElementById('myAlert') == null) {
+                                            $(div_name).prepend('<div id=myAlert>Mesage sended!</div>');
+                                            $('#sendMessage')[0].reset();
+                                        } else {
+                                            $('#myAlert').show()
+                                        }
+                                        setTimeout(function() { $('#myAlert').hide(); }, 5000);
+                                    }"),
+                                                        ],
+                                'options' => ['class' => 'btn btn-primary', 'type' => 'submit', 'id' =>'add-button'],
+                            ]);
+                            AjaxSubmitButton::end();
+                            ?>
                             <?php ActiveForm::end();?>
                         </div>
                     </div>

@@ -20,9 +20,12 @@
             \yii\bootstrap\ActiveForm::end();
             ?>
 
-
         </div>
-
+        <div class="col-lg-6 col-sm-6 ">
+            <div class="well">
+                <?= $map->display() ?>
+            </div>
+        </div>
 
     </div>
 </div>

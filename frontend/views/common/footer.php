@@ -1,4 +1,6 @@
 <?php
+use yii\helpers\Url;
+
 if(Yii::$app->user->isGuest) {
     echo \frontend\widgets\LoginWidget::widget();
 }
@@ -11,10 +13,9 @@ if(Yii::$app->user->isGuest) {
             <div class="col-lg-3 col-sm-3">
                 <h4>Information</h4>
                 <ul class="row">
-                    <li class="col-lg-12 col-sm-12 col-xs-3"><a href="about.html" >About</a></li>
-                    <li class="col-lg-12 col-sm-12 col-xs-3"><a href="agents.html" >Agents</a></li>
-                    <li class="col-lg-12 col-sm-12 col-xs-3"><a href="blog.html" >Blog</a></li>
-                    <li class="col-lg-12 col-sm-12 col-xs-3"><a href="contact.html" >Contact</a></li>
+                    <li class="col-lg-12 col-sm-12 col-xs-3"><a href="<?= Url::to(['/main/main/page', 'view' => 'about'])?>" >About</a></li>
+                    <li class="col-lg-12 col-sm-12 col-xs-3"><a href="<?= Url::to(['/main/main/page', 'view' => 'agent'])?>" >Agents</a></li>
+                    <li class="col-lg-12 col-sm-12 col-xs-3"><a href="<?= Url::to(['/main/main/contact'])?>" >Contact</a></li>
                 </ul>
             </div>
 

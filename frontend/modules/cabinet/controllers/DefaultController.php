@@ -2,6 +2,9 @@
 
 namespace frontend\modules\cabinet\controllers;
 
+use frontend\models\ChangePassword;
+use Yii;
+use yii\helpers\Url;
 use yii\web\Controller;
 
 /**
@@ -19,5 +22,18 @@ class DefaultController extends Controller
         $this->layout = "default";
 
         return $this->render('index');
+    }
+
+
+    public function actionChangePassword(){
+
+        $this->layout = "inner";
+        $model = new ChangePassword();
+
+        if($model->load(\Yii::$app->request->post()) && $model->changepassword()){
+            return $this->refresh();
+        }
+
+        return $this->render('change-password', ['model' => $model]);
     }
 }

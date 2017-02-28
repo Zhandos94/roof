@@ -11,7 +11,7 @@ use yii;
 use yii\base\Component;
 use yii\helpers\BaseFileHelper;
 use yii\helpers\Url;
-
+use yii\base\ErrorException;
 
 class Common extends Component
 {
@@ -20,17 +20,34 @@ class Common extends Component
 
     public function sendMail($subject, $text, $emailFrom = 'mr.dosik_kz@mail.ru', $nameFrom = 'Advert')
     {
-        if (\Yii::$app->mail->compose()
-            ->setFrom(['zhumagali.zh@yandex.ru' => 'Advert'])
-            ->setTo([$emailFrom => $nameFrom])
-            ->setSubject($subject)
-            ->setHtmlBody($text)
-            ->send()
-        ) {
-            $this->trigger(self::EVENT_NOTIFY);
-            return true;
-        }
+//        if (\Yii::$app->mail->compose()
+//            ->setFrom(['zhumagali.zh@yandex.ru' => 'Advert'])
+//            ->setTo([$emailFrom => $nameFrom])
+//            ->setSubject($subject)
+//            ->setHtmlBody($text)
+//            ->send()
+//        ) {
+//            $this->trigger(self::EVENT_NOTIFY);
+//            return true;
+//        }
 
+      }
+
+    public static function  Mail($subject, $mail, $text, $name)
+    {
+        try{
+            $send_text = $text . 'С/У ' . $name;
+            Yii::$app->mailer->compose()
+                ->setFrom('zh.zhumagaly@gmail.com')
+                ->setTo($mail)
+                ->setSubject($subject)
+                ->setTextBody($send_text)
+                ->send();
+
+            return true;
+        } catch (ErrorException $e) {
+            Yii::error($e->getMessage(), 'advert');
+        }
 
     }
 

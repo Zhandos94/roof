@@ -16,10 +16,10 @@ class SubscribeWidget extends  Widget{
     public function run(){
         $model = new Subscribe();
 
-        if($model->load(\Yii::$app->request->post()) && $model->save()){
-
-            \Yii::$app->session->setFlash('message','Success subscribe');
-            \Yii::$app->controller->redirect("/");
+        if($model->load(\Yii::$app->request->post())){
+            if ($model->validate()) {
+                $model->save();
+            }
         }
 
         return $this->render("subscribe", ['model' => $model]);

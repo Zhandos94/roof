@@ -133,12 +133,8 @@ class AdvertController extends Controller
         $image = [];
         if ($general_image = $model->general_image) {
             $image[] = '/uploads/adverts/' . $model->idadvert . '/general/small_' . $general_image ;
-//            $image[] = '<img src="/uploads/adverts/' . $model->idadvert . '/general/small_' . $general_image . '" width=250>';
-//            $image[] = '<img src="/uploads/adverts/' . $model->idadvert . '/general/small_' . $general_image . '" width="50px" height="auto">';
-//            $image[] = '<img src="/uploads/adverts/' . $model->idadvert . '/general/small_' . $general_image . '" class= "kv-preview-data file-preview-image">';
         }
-//        var_dump($image);
-//        die();
+
 
         if (Yii::$app->request->isPost) {
 
@@ -161,8 +157,6 @@ class AdvertController extends Controller
         } catch (\yii\base\Exception $e) {
         }
 
-//        var_dump($images_add);
-//        die();
         return $this->render("step2", [
             'model' => $model,
             'image' => $image,
@@ -216,10 +210,6 @@ class AdvertController extends Controller
             $file = UploadedFile::getInstanceByName('images');
             $model = Advert::findOne($id);
             $model->scenario = 'step';
-
-//            $file[] = UploadedFile::getInstances($model, 'images');
-//            var_dump(count($file));
-//            die();
 
             if (!empty($file)) {
 

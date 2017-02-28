@@ -10,7 +10,6 @@ use yii\helpers\Url;
         <div class="container">
             <div class="navbar-header">
 
-
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
@@ -25,12 +24,9 @@ use yii\helpers\Url;
                 <?php
                     $menuItems = [
                         ['label' => 'Home', 'url' => Url::to(['/main/default']), 'options' => ['class' => 'active']],
-                        ['label' => 'About', 'url' => '#'],
-                        ['label' => 'Agent', 'url' => '#'],
-                        ['label' => 'Blog', 'url' => '#'],
-                        ['label' => 'Cabinet', 'url' => Url::to(['/cabinet/advert'])],
-                        ['label' => 'Login', 'url' => Url::to(['/main/main/login'])],
-                        ['label' => 'logout', 'url' => Url::to(['/main/main/logout'])],
+                        ['label' => 'About', 'url' => ['/main/main/page', 'view' => 'about']],
+                        ['label' => 'Agent', 'url' => ['/main/main/page', 'view' => 'agent']],
+                        ['label' => 'Contact', 'url' => Url::to(['/main/main/contact'])],
                         ['label' => 'Register', 'url' => Url::to(['/main/main/register'])],
                     ];
                     echo Nav::widget([
@@ -52,17 +48,25 @@ use yii\helpers\Url;
     <!-- Header Starts -->
     <div class="header">
         <a href="<?= Url::to(['/main/default'])?>" ><img src="/images/logo.png"  alt="Realestate"></a>
-            <?php
-                $menuItems = [
-                    ['label' => 'Buy', 'url' => '#'],
-                    ['label' => 'Sale', 'url' => '#'],
-                    ['label' => 'Rent', 'url' => '#'],
-                ];
-                echo Nav::widget([
-                   'options' => ['class' => ['pull-right']],
-                   'items' => $menuItems,
-                ]);
-            ?>
+
+        <?php
+            $menuItems = [];
+            $guest = Yii::$app->user->isGuest;
+            if($guest) {
+                $menuItems[] =  ['label' => 'Login', 'url' => '#',
+                    'linkOptions' => ['data-target' => '#loginpop', 'data-toggle' => "modal"]];
+            }
+            else{
+                $menuItems[] =  ['label' => 'Manager adverts', 'url' => ['/cabinet/advert']];
+                $menuItems[] =  ['label' => 'Settings', 'url' => ['/cabinet/default/settings']];
+                $menuItems[] =  ['label' => 'Change Password', 'url' => ['/cabinet/default/change-password']];
+                $menuItems[] = ['label' => 'Logout',  'url' => ['/main/main/logout'], 'linkOptions' => ['data-method' => 'post']];
+            }
+            echo Nav::widget([
+                'options' => ['class' => 'pull-right'],
+                'items' => $menuItems,
+            ]);
+        ?>
     </div>
     <!-- #Header Starts -->
 </div>

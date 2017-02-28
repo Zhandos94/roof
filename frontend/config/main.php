@@ -41,6 +41,22 @@ return [
                 'charset' => 'UTF-8',
             ],
         ],
+        'mailer' => [
+            'class' => 'yii\swiftmailer\Mailer',
+            'useFileTransport' => false,
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'smtp.gmail.com',
+                'username' => 'zh.zhumagaly@gmail.com',
+                'password' => 'SamsunG1994',
+                'port' => '587',
+//                'username'   => 'zhumagali.zh@yandex.ru',
+//                'password'   => 'YandeXZhandos94',
+//                'port'       => '465',
+                'encryption' => 'tls',
+            ],
+        ],
+
 
         'common' => [
             'class' => 'frontend\components\Common',
@@ -99,6 +115,9 @@ return [
 				'news/<slug:[\w-]+>' => 'news/default/index',
 			]
 		],
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+        ],
 	],
 	'params' => $params,
 ];

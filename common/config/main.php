@@ -11,6 +11,7 @@ return [
 		'authManager' => [
 			'class' => 'yii\rbac\DbManager',
 		],
+
 		'i18n' => [
 			'class' => Zelenin\yii\modules\I18n\components\I18N::className(),
 			'languages' => ['ru-RU', 'kz-KZ', 'en-US'],
@@ -26,6 +27,16 @@ return [
 		],
         'assetManager' => [
             'forceCopy' => true
+        ],
+        'urlManager' => [
+            'class' => 'yii\web\UrlManager',
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+            'rules' => [
+                'pages/<view:[a-zA-Z0-9-]+>' => 'main/main/page',
+                'view-advert/<id:\d+>' => 'main/main/view-advert',
+                'cabinet/<action_cabinet:(settings|change-password)>' => 'cabinet/default/<action_cabinet>'
+            ],
         ],
 	],
 	'timeZone' => 'Asia/Almaty',

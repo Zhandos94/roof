@@ -83,7 +83,7 @@ use yii\helpers\Url;
     </div>
 </div><!-- End banner -->
 <div class="container">
-    <div class="properties-listing spacer"> <a href="buysalerent.html"  class="pull-right viewall">View All Listing</a>
+    <div class="properties-listing spacer">
         <h2>Featured Properties</h2>
         <div id="owl-example" class="owl-carousel">
             <?php foreach ($property as $row) { ?>
